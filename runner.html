@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>js runner</title>
+  </head>
+  <body id="runner" onload="">
+    <div id="log" style="white-space: pre; text-align: left; font-family: monospace"></div>
+    <script type="text/javascript" charset="utf-8">
+      (function() {
+        var log = document.getElementById('log');
+        function print(value) {
+          log.innerHTML += value + '\n';
+          console.log(value);
+        }
+        window.print = print;
+      })();
+    </script>
+    <script src="functions/04_new.js" type="text/javascript" charset="utf-8"></script>
+  </body>
+</html>
