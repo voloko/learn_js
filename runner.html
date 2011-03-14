@@ -19,7 +19,7 @@
         function print() {
           var value = slice.call(arguments).join('');
           log.innerHTML += (value || '') + '\n';
-          console.log(value);
+          console.log.apply(console, arguments);
         }
         
         function printh() {
@@ -32,6 +32,6 @@
         window.printh = window.h = printh;
       })();
     </script>
-    <script src="basics/06_typecast.js" type="text/javascript" charset="utf-8"></script>
+    <script src="prototypes/03_inheritance.js" type="text/javascript" charset="utf-8"></script>
   </body>
 </html>
