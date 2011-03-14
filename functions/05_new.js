@@ -1,26 +1,25 @@
+h('new will create a new object using function as a constructor');
 function Cat() {
     this.name = 'Kitty';
 };
-
-c = Cat();
-print(c);
-
 var c = new Cat();
-print(c.name);
+print('c.name with new: ', c.name);
 
-// calling without new adds 'name' to window
-print(name);
+var d = Cat();
+print('without new keyword: ', d);
+print('will also set name on window: ', name);
 
 
+
+h('create functions in member constructor');
 function Dog() {
     this.times = 0;
     
     this.bark = function() {
         this.times++;
-        print('bou wou');
+        return 'bow wou';
     };
 }
-
 var dog = new Dog();
-dog.bark();
-print(dog.times);
+print('Dog barks: ', dog.bark());
+print('Dog barked times: ', dog.times);

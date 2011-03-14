@@ -1,46 +1,50 @@
+h('boolean variables');
 var x = true,
     z = false;
     
 if (x) {
-    print('x');
+    print('x is truthy');
 }
 
-if (z) print('z');
+if (z) {
+    print('z is truthy');
+}
 
-if (!z) print('!z');
+if (!z) {
+    print('!z is truthy');
+}
 
-print('');
-print('false:');
 
 
+h('false in javascript');
 // falsy
-if (false) {
-    print(false);
+if (!false) {
+    print('!false:');
 }
 
-if (0) {
-    print(0);
+if (!0) {
+    print('!0');
 }
 
-if ('') {
-    print('string: ');
+if (!'') {
+    print('!""');
 }
 
-if (undefined) {
-    print(undefined);
+if (!undefined) {
+    print('!undefined');
 }
 
-if (null) {
-    print(null);
+if (!null) {
+    print('!null');
 }
 
-if (NaN) {
-    print(NaN);
+if (!NaN) {
+    print('!NaN');
 }
 
-print('');
-print('true:');
 
+
+h('true in javascript');
 if ('0') {
     print('string: 0');
 }
@@ -50,77 +54,63 @@ if ('false') {
 }
 
 if ('string') {
-    print('string');
+    print('string: "string"');
 }
 
 if (4) {
-    print(4);
+    print('non zerro variable: 4');
 }
 
-print('');
-print('==');
-
-if (0 == '0') {
-    print("0 == '0'");
+if (1/0) {
+    print('Infinity: ', 1/0);
 }
 
-if (0 == false) {
-    print("0 == false");
+if ({}) {
+    print('empty objects: ', {});
 }
 
-if (0 == undefined) {
-    print("0 == undefined");
-}
-
-if (false == undefined) {
-    print("false == undefined");
-}
-
-if (0 == null) {
-    print("0 == null");
-}
-
-if (0 === '0') {
-    print("0 === '0'");
-}
-
-if (0 === 0) {
-    print("0 === 0");
-}
-
-print('');
-var obj = {
-    x: false
-};
-
-if (!obj.x) {
-    print('no x');
-}
-
-if (obj.x === undefined) {
-    print('surely no x');
-}
-
-if (!('x' in obj)) {
-    print('x not in obj');
+if ([]) {
+    print('empty arrays: ', []);
 }
 
 
-print('');
-print('||  &&');
-print(1 && 2);
-print(1 && 2 && 0 && 3);
+h('comparing using ==');
+print("0 == '0': ", 0 == '0');
+print("0 == '0.0': ", 0 == '0.0');
+print("0 == '': ", 0 == '');
+print("0 == false: ", 0 == false);
+print("0 == undefined: ", 0 == undefined);
+print('false == undefined: ', false == undefined);
+print("0 == null: ", 0 == null);
 
-print(1 || 2);
-print(0 || 2 || 0 || 3);
 
-print('');
+h('comparing using ===');
+print("0 === '0': ", 0 === '0');
+print("0 === '0': ", 0 === '0.0');
+print("0 === '': ", 0 === '');
+print("0 === false: ", 0 === false);
+print("0 === undefined: ", 0 === undefined);
+print('false === undefined: ', false === undefined);
+print("0 === null: ", 0 === null);
+
+
+h('boolean operations: || and &&');
+print('&& returns first falsy variable: ', 1 && 0);
+print('... or last if no falsy present: ', 1 && 2);
+print('1 && 2 && 0 && 3: ', 1 && 2 && 0 && 3);
+print('1 && 2 && 3 && {}: ', 1 && 2 && 3 && {});
+print('|| returns first truthy variable: ', 1 || 2);
+print('... or last if no truthy present: ', '' || false);
+print('0 || 2 || 0 || 3: ', 0 || 2 || 0 || 3);
+print('0 || "" || false || [2]: ', 0 || '' || false || [2]);
+
+
+
+h('using || and && as control structures');
+obj = {};
 obj.y = obj.y || 10;
-print(obj.y);
-obj.y && print(obj.y);
-obj.z || print('no z');
-
-print('');
-print(
-    (obj.subobj || { foo: 'bar' }).foo
-);
+print('set default value for obj.y: ', obj.y);
+obj.y && print('print only if obj.y is true: ', obj.y);
+obj.z || print('print only if z if false: ', obj.z);
+print('use as default in expressions: ',
+    (obj.z || { foo: 'bar' }).foo);

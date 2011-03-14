@@ -6,16 +6,32 @@
   </head>
   <body id="runner" onload="">
     <div id="log" style="white-space: pre; text-align: left; font-family: monospace"></div>
+    <style type="text/css" media="screen">
+      .h {
+        font-weight: bold;
+      }
+    </style>
     <script type="text/javascript" charset="utf-8">
       (function() {
         var log = document.getElementById('log');
-        function print(value) {
-          log.innerHTML += value + '\n';
+        var slice = [].slice;
+        
+        function print() {
+          var value = slice.call(arguments).join('');
+          log.innerHTML += (value || '') + '\n';
           console.log(value);
         }
+        
+        function printh() {
+          var value = slice.call(arguments).join('\n');
+          log.innerHTML += '\n<span class="h">' + (value || '') + '</span>\n';
+          console.log('\n' + value);
+        }
+        
         window.print = print;
+        window.printh = window.h = printh;
       })();
     </script>
-    <script src="functions/04_new.js" type="text/javascript" charset="utf-8"></script>
+    <script src="basics/06_typecast.js" type="text/javascript" charset="utf-8"></script>
   </body>
 </html>
