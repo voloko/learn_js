@@ -1,0 +1,19 @@
+.ljs-iframe-iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border: none;
+}
+
+.ljs-iframe-cover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border: none;
+    z-index: 2;
+    background: transparent;
+}
+
+.ljs-iframe-cover_hidden {
+    display: none;
+}
