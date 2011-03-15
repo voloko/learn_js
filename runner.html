@@ -15,6 +15,9 @@
       (function() {
         var log = document.getElementById('log');
         var slice = [].slice;
+        if (!window.console) {
+          window.console = { log: function() {} };
+        }
         
         function print() {
           var value = slice.call(arguments).join('');
@@ -22,14 +25,14 @@
           console.log.apply(console, arguments);
         }
         
-        function printh() {
+        function h() {
           var value = slice.call(arguments).join('\n');
           log.innerHTML += '\n<span class="h">' + (value || '') + '</span>\n';
           console.log('\n' + value);
         }
         
         window.print = print;
-        window.printh = window.h = printh;
+        window.h = h;
       })();
     </script>
     

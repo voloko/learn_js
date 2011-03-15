@@ -2,7 +2,7 @@ h('arguments array');
 function merge(target) {
     for (var i = 1; i < arguments.length; i++) {
         for (var key in arguments[i]) {
-            target[key] = arguments[key];
+            target[key] = arguments[i][key];
         }
     }
     return target;
