@@ -49,13 +49,20 @@ uki([
             { view: Ace, pos: 'l:0 t:30px r:0 b:0' }
         ],
         rightChildViews: [
-            { view: Iframe, pos: 'l:0 t:0 r:0 b:0', covered: true,
+            { view: Iframe, pos: 'l:0 t:0 r:0 b:0',
               name: 'code-target' }
         ]
     }
 ]).attach();
 
-uki('SplitPane').handlePosition(global.localStorage.splitPanePosition || 400);
+uki('SplitPane')
+    .handlePosition(global.localStorage.splitPanePosition || 400)
+    .on('handleMove', function() {
+        uki('Iframe').covered(true);
+    })
+    .on('handleStop', function() {
+        uki('Iframe').covered(false);
+    });
 
 uki('Select').on('change', function() {
     uki('Ace').value(this.value());
