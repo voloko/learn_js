@@ -15,7 +15,7 @@ app.configure(function() {
 app.get('/', sr.getAppHandler('Learn js', 'app.js'));
 
 app.post('/eval', function(req, res) {
-    fs.readFile('./runner.html', 'utf-8', function(err, code) {
+    fs.readFile(path.join(__dirname, 'runner.html'), 'utf-8', function(err, code) {
         code = code.replace(
             /<!-- eval -->(.|\n)*<!-- #eval -->/, 
             '<script>' + req.body.code + '</script>'
@@ -33,7 +33,8 @@ app.get('/vendor/*', function(req, res){
 });
 
 app.get('/*.js', sr.getHandler({
-    searchPaths: [fs.realpathSync(__dirname)].concat(require.paths)
+    searchPaths: [fs.realpathSync(__dirname)].concat(require.paths),
+    serverRoot: __dirname
 }));
 
 require('util').puts("Server at http://" + HOST + ":" + PORT + "/");
