@@ -83,7 +83,7 @@ uki.addListener(global, 'unload', function() {
 });
 
 function runCode() {
-    post('/eval', { code: uki('Ace').value() });
+    post('./eval', { code: uki('Ace').value() });
 }
 
 function post(url, data) {

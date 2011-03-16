@@ -12,7 +12,7 @@ app.configure(function() {
     app.use(connect.bodyParser()); 
 });
 
-app.get('/', sr.getAppHandler('Learn js', '/app.js'));
+app.get('/', sr.getAppHandler('Learn js', 'app.js'));
 
 app.post('/eval', function(req, res) {
     fs.readFile('./runner.html', 'utf-8', function(err, code) {
