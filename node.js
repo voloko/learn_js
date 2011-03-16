@@ -14,20 +14,6 @@ app.configure(function() {
 
 app.get('/', sr.getAppHandler('Learn js', 'app.js'));
 
-app.post('/eval', function(req, res) {
-    fs.readFile(path.join(__dirname, 'runner.html'), 'utf-8', function(err, code) {
-        code = code.replace(
-            /<!-- eval -->(.|\n)*<!-- #eval -->/, 
-            '<script>' + req.body.code + '</script>'
-        );
-        res.writeHead(200, { 
-            "Content-Type": 'text/html',
-            "Content-Length": code.length
-        });
-        res.end(code);
-    });
-});
-
 app.get('/vendor/*', function(req, res){
     res.sendfile(req.url.substring(1));
 });
@@ -36,6 +22,10 @@ app.get('/*.js', sr.getHandler({
     searchPaths: [fs.realpathSync(__dirname)].concat(require.paths),
     serverRoot: __dirname
 }));
+
+app.get('/*', function(req, res) {
+    res.sendfile(req.param(0));
+});
 
 require('util').puts("Server at http://" + HOST + ":" + PORT + "/");
 app.listen(PORT, HOST);

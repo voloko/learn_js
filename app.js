@@ -55,8 +55,14 @@ uki([
     }
 ]).attach();
 
+var windowSize = uki('SplitPane')[0].clientRect().width;
+
 uki('SplitPane')
-    .handlePosition(global.localStorage.splitPanePosition || 400)
+    .handlePosition(
+        Math.max(
+            Math.min(
+                global.localStorage.handlePosition || windowSize / 2, 
+                windowSize - 100), 100))
     .on('handleMove', function() {
         uki('Iframe').covered(true);
     })
@@ -78,31 +84,11 @@ uki.addListener(global, 'keyup', function(e) {
 });
 
 uki.addListener(global, 'unload', function() {
-    global.localStorage.splitPanePosition = uki('SplitPane').handlePosition();
+    global.localStorage.handlePosition = uki('SplitPane').handlePosition();
     global.localStorage.selectedIndex = uki('Select').selectedIndex();
 });
 
 function runCode() {
-    post('./eval', { code: uki('Ace').value() });
-}
-
-function post(url, data) {
-    var form = uki.createElement('form', { 
-        target: uki('Iframe').name(),
-        action: url,
-        method: 'POST',
-        className: 'ljs-iframe-form'
-    });
-    uki.forEach(data, function(value, key) {
-        form.appendChild(uki.createElement('input', {
-            type: 'hidden',
-            name: key,
-            value: value
-        }));
-    });
-    uki.doc.body.appendChild(form);
-    form.submit();
-    uki.defer(function() {
-        uki.removeElement(form);
-    });
+    window.learn_js_codeToExecute = uki('Ace').value();
+    uki('Iframe').src('runner.html?=' + uki.guid++);
 }
